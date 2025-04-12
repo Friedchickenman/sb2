@@ -51,6 +51,12 @@ public class BoardController {
 
         if(bindingResult.hasErrors()){
             log.info("has errors..........");
+            
+            bindingResult.getAllErrors().forEach(erro -> {
+                log.info("=======================");
+                log.info()
+            });
+
             rttr.addFlashAttribute("errors",bindingResult.getAllErrors());
         
             return "redirect:/board/register";
