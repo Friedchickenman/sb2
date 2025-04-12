@@ -1,5 +1,8 @@
 package org.zerock.sb2.board.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,15 +55,22 @@ public class BoardController {
         if(bindingResult.hasErrors()){
             log.info("has errors..........");
             
-            bindingResult.getAllErrors().forEach(erro -> {
+            java.util.Map<String, String> errorMap = new HashMap<>();
+
+            bindingResult.getAllErrors().forEach(fieldError -> {
                 log.info("=======================");
-                log.info()
+                log.info("field: " = fieldError.getfield()); //에러가 발생한 필드명
+                log.info("Rejected Value: " + fieldError.getRejectedValue()); // 사용자가 입력한 잘못된 값값
+                log.info("Error Message: " + fieldError.getDefaultMessage()); // 에러 메시지
+            
+                errorMap.put(fieldError.getfield(),fieldError.getDefaultMessage() );
+
+                rttr.addFlashAttribute("errors", errorMap);
             });
 
-            rttr.addFlashAttribute("errors",bindingResult.getAllErrors());
-        
             return "redirect:/board/register";
-        }
+
+        }//end if
         
         return "redirect:/board/list";
     }
