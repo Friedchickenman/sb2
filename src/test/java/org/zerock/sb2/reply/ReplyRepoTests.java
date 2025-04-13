@@ -1,12 +1,18 @@
 package org.zerock.sb2.reply;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.sb2.board.entities.BoardEntity;
+import org.zerock.sb2.reply.dto.ReplyListDTO;
 import org.zerock.sb2.reply.entities.ReplyEntity;
 import org.zerock.sb2.reply.repository.ReplyRepository;
 
@@ -50,6 +56,40 @@ public class ReplyRepoTests {
 
         log.info(reply);
         
+    }
+
+    @Test
+    public void testListOfBoard() {
+
+        Long bno = 123L;
+
+        Pageable pageable = PageRequest.of(0,10,Sort.by("rno").descending());
+
+        repository.listOfBoard(bno, pageable);
+    }
+
+    @Test
+    public void testListOfBoard2() {
+
+        Long bno = 123L;
+
+        Pageable pageable = PageRequest.of(0,10,Sort.by("rno").descending());
+
+        Page<Object[]> result = repository.listOfBoard2(bno, pageable);
+        
+        result.getContent().forEach(arr -> log.info(Arrays.toString(arr)));
+    }
+
+    @Test
+    public void testListOfBoard3() {
+
+        Long bno = 123L;
+
+        Pageable pageable = PageRequest.of(0,10,Sort.by("rno").descending());
+
+        Page<ReplyListDTO> result = repository.listOfBoard3(bno, pageable);
+        
+        result.getContent().forEach(dto -> log.info(dto));
     }
     
 }
