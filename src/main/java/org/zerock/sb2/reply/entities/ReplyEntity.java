@@ -21,7 +21,7 @@ import lombok.ToString;
     @Index(name = "idx_board", columnList = "board_bno")
   })
 @Getter
-@ToString
+@ToString(exclude = {"board"})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,7 +35,7 @@ public class ReplyEntity {
 
     private String replyer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private BoardEntity board;
 
     @CreatedDate
