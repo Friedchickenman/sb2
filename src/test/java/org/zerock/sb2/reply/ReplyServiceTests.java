@@ -31,4 +31,9 @@ public class ReplyServiceTests {
 
         }//end for
     }
+
+    @Test
+    public void testRead(){
+        log.info(service.get(27L));
+    }
 }
