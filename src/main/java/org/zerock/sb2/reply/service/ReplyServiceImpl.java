@@ -1,0 +1,17 @@
+package org.zerock.sb2.reply.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.zerock.sb2.reply.repository.ReplyRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@Service
+@Transactional
+@Log4j2
+@RequiredArgsConstructor
+public class ReplyServiceImpl implements ReplyService{
+    
+    private final ReplyRepository replyRepository;
+}
