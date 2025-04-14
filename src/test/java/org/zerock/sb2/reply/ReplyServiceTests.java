@@ -3,6 +3,7 @@ package org.zerock.sb2.reply;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.reply.dto.ReplyAddDTO;
 import org.zerock.sb2.reply.service.ReplyService;
 
@@ -34,6 +35,15 @@ public class ReplyServiceTests {
 
     @Test
     public void testRead(){
-        log.info(service.get(27L));
+        log.info(service.get(270L));
+    }
+
+    @Test
+    public void testListOfBoard() {
+
+        PageRequestDTO requestDTO = new PageRequestDTO();
+        Long bno = 8123L;
+
+        log.info(service.getListOfBoard(bno, requestDTO));
     }
 }
